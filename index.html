@@ -24,16 +24,6 @@
 <div id="mapid"></div>
 <script>
 
-	
-
-	//L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-       	//maxZoom: 20,
-	//	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-	//		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-	//	id: 'mapbox/streets-v11',
-	//	tileSize: 512,
-	//	zoomOffset: -1
-	//}).addTo(mymap);
 	var mymap = L.map('mapid', {
             center: [51.14471, -2.69866],
 	    zoom: 13,
@@ -53,16 +43,30 @@
             maxNativeZoom: 18,
 	    maxZoom: 22
         });
+	
+	var surface = L.tileLayer('https://geoffrowland.github.io/Surface-Street/{z}/{x}/{y}.png', {
+	    tms: true, 
+	    opacity: 1.0,
+	    maxNativeZoom: 18,	
+	    maxZoom: 20,
+	    minZoom: 12,
+	    attribution: 'LiDAR 1m DSM Environment Agency OGL &copy; Crown Copyright 2021'
+        });	
+	
 	var marker = L.marker([51.14471, -2.69866]).addTo(mymap);
         
-	var A_block = L.marker([51.130434, -2.734023]).addTo(mymap);
-	var D_block = L.marker([51.130232, -2.733947]).addTo(mymap);
-	var M_block = L.marker([51.129660, -2.732584]).addTo(mymap);
-	var J_block = L.marker([51.129458, -2.732083]).addTo(mymap);
-	var E_block = L.marker([51.129195, -2.731886]).addTo(mymap);
-	var R_block = L.marker([51.130293, -2.732938]).addTo(mymap);
-	var C_block = L.marker([51.129852, -2.7334955]).addTo(mymap);
-
+	var collegeC = L.marker([51.129852, -2.7334955]).addTo(mymap);
+	
+	var collegeD = L.marker([51.130253, -2.733958]).addTo(mymap);
+	
+	var collegeM = L.marker([51.129647, -2.732584]).addTo(mymap);
+	
+	marker.bindPopup("<img class='popup' src='tor.jpg'/><br /><b>Glastonbury Tor</b>").openPopup();
+	collegeC.bindPopup("<b>C Block</b><br>Strode College").openPopup();
+	collegeD.bindPopup("<b>D Block</b><br>Strode College").openPopup();
+	collegeM.bindPopup("<b>M Block</b><br>Strode College").openPopup();
+	
+	
 	
         var baseMaps = {
            "OSM ": osm,
@@ -70,9 +74,11 @@
         };
 
         var overlayMaps = {
+	    "Surface": surface,
             "Marker": marker,
-            "College": college,
-            "College 1": college1
+            "CollegeC": collegeC,
+            "CollegeD": collegeD,
+	    "CollegeM": collegeM
        };
 	
 
